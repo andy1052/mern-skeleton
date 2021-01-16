@@ -4,7 +4,6 @@
   "description": "A MERN stack skeleton web application",
   "scripts": {
     "development": "nodemon",
-
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.3.1",
+    "lodash": "^4.17.20",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.12",
     "react": "^17.0.1",
