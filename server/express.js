@@ -8,7 +8,14 @@ import Template from './../template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 
+
+// For development mode ONLY. *** Comment out for production***
+import devBundle from './devBundle'
+
 const app = express();
+
+// For development mode ONLY. *** Comment out for production***
+devBundle.compile(app);
 
 
 app.use(bodyParser.json());
