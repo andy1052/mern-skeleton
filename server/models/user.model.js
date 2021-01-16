@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import crypto from 'crypto'
 
 const UserSchema = new mongoose.Schema({
 
@@ -12,7 +13,7 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		unique: 'Email Already Exists!',
-		match: [/.+\..+/, 'Please provide a valid email address.'],
+		match: [/.+\@.+\..+/, 'Please provide a valid email address'],
 		require: 'Email is required'
 	},
 

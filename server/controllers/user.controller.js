@@ -1,10 +1,10 @@
 import User from '../models/user.model'
 import extend from 'lodash/extend'
-import errorHandler from './../helpers/dbErrorHandler'
+import errorHandler from '../../helpers/dbErrorHandler'
 
 
 // Create a new user (ie: when express receives a POST request /api/users):
-const create = async (req, res, next) => {
+const create = async (req, res, next) => {	
 	const user = new User(req.body);
 	try {
 		await user.save();
@@ -12,6 +12,7 @@ const create = async (req, res, next) => {
 			message: "User Successfully Created!"
 		})
 	} catch(err) {
+		console.log("Error: ", err);
 		return res.status(400).json({
 			error: errorHandler.getErrorMessage(err)
 		})
@@ -47,7 +48,7 @@ const userByID = async (req, res, next, id) => {
 			})
 		}
 		req.profile = user;
-		next();
+		next(); // This passes control to the READ function below.
 	} catch(err) {
 		return res.status(400).json({
 			error: "Could Not Retrieve User!"
@@ -72,9 +73,10 @@ const update = async (req, res, next) => {
 		await user.save();
 		user.hashed_password = undefined;
 		user.salt = undefined;
+		res.json(user);
 	} catch(err) {
 		return res.status(400).json({
-			error: errorHandler.getErrorMessage(err);
+			error: errorHandler.getErrorMessage(err)
 		})
 	}
 };
@@ -90,7 +92,7 @@ const remove = async (req, res, next) => {
 		res.json(deletedUser);
 	} catch(err) {
 		return res.status(400).json({
-			error: errorHandler.getErrorMessage(err);
+			error: errorHandler.getErrorMessage(err)
 		})
 	}
 
